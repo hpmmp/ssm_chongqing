@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.crud.dao.DictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.cqut.crud.bean.Dictionary">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dic_type" jdbcType="VARCHAR" property="dicType" />
+    <result column="dic_value" jdbcType="VARCHAR" property="dicValue" />
+    <result column="dic_name" jdbcType="VARCHAR" property="dicName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dic_type, dic_value, dic_name
+  </sql>
+  <select id="translate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dictionary
+    where dic_type=#{dicType} and dic_value=#{dicValue}
+  </select>
+
+  <select id="selectDictionaries" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dictionary
+    where dic_type in
+    <foreach item="item" index="index" collection="list"
+             open="(" separator="," close=")" >
+      #{item}
+    </foreach>
+  </select>
+</mapper>

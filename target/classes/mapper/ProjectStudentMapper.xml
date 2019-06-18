@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.crud.dao.ProjectStudentMapper">
+    <resultMap id="BaseResultMap" type="com.cqut.crud.bean.ProjectStudent">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="student_id" jdbcType="INTEGER" property="studentId"/>
+        <result column="project_id" jdbcType="INTEGER" property="projectId"/>
+        <result column="id_number" jdbcType="VARCHAR" property="idNumber"/>
+        <result column="school_roll_id" jdbcType="INTEGER" property="schoolRollId"/>
+        <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="amount" jdbcType="DOUBLE" property="amount"/>
+        <result column="tuition" jdbcType="DOUBLE" property="tuition"/>
+        <result column="from_type" jdbcType="VARCHAR" property="fromType"/>
+        <result column="applied_at" jdbcType="TIMESTAMP" property="appliedAt"/>
+        <result column="census_register" jdbcType="VARCHAR" property="censusRegister"/>
+        <result column="school_name" jdbcType="VARCHAR" property="schoolName"/>
+        <result column="ownership" jdbcType="INTEGER" property="ownership"/>
+        <result column="school_phase" jdbcType="VARCHAR" property="schoolPhase"/>
+        <result column="poverty_type" jdbcType="VARCHAR" property="povertyType"/>
+        <result column="bankcard_id" jdbcType="INTEGER" property="bankcardId"/>
+        <result column="returned_at" jdbcType="TIMESTAMP" property="returnedAt"/>
+        <result column="no_pass_reason" jdbcType="VARCHAR" property="noPassReason"/>
+    </resultMap>
+    <resultMap id="ResultMapWithProject" type="com.cqut.crud.bean.ProjectStudent">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="student_id" jdbcType="INTEGER" property="studentId"/>
+        <result column="project_id" jdbcType="INTEGER" property="projectId"/>
+        <result column="id_number" jdbcType="VARCHAR" property="idNumber"/>
+        <result column="school_roll_id" jdbcType="INTEGER" property="schoolRollId"/>
+        <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="amount" jdbcType="DOUBLE" property="amount"/>
+        <result column="tuition" jdbcType="DOUBLE" property="tuition"/>
+        <result column="from_type" jdbcType="VARCHAR" property="fromType"/>
+        <result column="applied_at" jdbcType="TIMESTAMP" property="appliedAt"/>
+        <result column="census_register" jdbcType="VARCHAR" property="censusRegister"/>
+        <result column="school_name" jdbcType="VARCHAR" property="schoolName"/>
+        <result column="ownership" jdbcType="INTEGER" property="ownership"/>
+        <result column="school_phase" jdbcType="VARCHAR" property="schoolPhase"/>
+        <result column="poverty_type" jdbcType="VARCHAR" property="povertyType"/>
+        <result column="bankcard_id" jdbcType="INTEGER" property="bankcardId"/>
+        <result column="returned_at" jdbcType="TIMESTAMP" property="returnedAt"/>
+        <result column="no_pass_reason" jdbcType="VARCHAR" property="noPassReason"/>
+        <association property="fundedProject" javaType="com.cqut.crud.bean.FundedProject">
+            <id column="name" property="name"/>
+            <id column="year" property="year"/>
+            <id column="term" property="term"/>
+            <id column="description" property="description"/>
+        </association>
+    </resultMap>
+    <resultMap id="ResultMapWithProjectAndStudent" type="com.cqut.crud.bean.ProjectStudent">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="student_id" jdbcType="INTEGER" property="studentId"/>
+        <result column="project_id" jdbcType="INTEGER" property="projectId"/>
+        <result column="id_number" jdbcType="VARCHAR" property="idNumber"/>
+        <result column="school_roll_id" jdbcType="INTEGER" property="schoolRollId"/>
+        <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId"/>
+        <result column="p_status" jdbcType="VARCHAR" property="status"/>
+        <result column="amount" jdbcType="DOUBLE" property="amount"/>
+        <result column="tuition" jdbcType="DOUBLE" property="tuition"/>
+        <result column="from_type" jdbcType="VARCHAR" property="fromType"/>
+        <result column="applied_at" jdbcType="TIMESTAMP" property="appliedAt"/>
+        <result column="census_register" jdbcType="VARCHAR" property="censusRegister"/>
+        <result column="school_name" jdbcType="VARCHAR" property="schoolName"/>
+        <result column="ownership" jdbcType="INTEGER" property="ownership"/>
+        <result column="school_phase" jdbcType="VARCHAR" property="schoolPhase"/>
+        <result column="poverty_type" jdbcType="VARCHAR" property="povertyType"/>
+        <result column="bankcard_id" jdbcType="INTEGER" property="bankcardId"/>
+        <result column="returned_at" jdbcType="TIMESTAMP" property="returnedAt"/>
+        <result column="no_pass_reason" jdbcType="VARCHAR" property="noPassReason"/>
+        <association property="fundedProject" javaType="com.cqut.crud.bean.FundedProject">
+            <id column="f_name" property="name"/>
+            <id column="f_limitComment" property="limitComment"/>
+            <id column="f_status" property="status"/>
+        </association>
+        <association property="student" javaType="com.cqut.crud.bean.Student">
+            <id column="s_name" property="name"/>
+            <id column="gender" property="gender"/>
+            <id column="census_register" property="censusRegister"/>
+            <id column="family_poverty_desc" property="familyPovertyDesc"/>
+        </association>
+    </resultMap>
+    <resultMap id="ResultMapWithStudentStatusAndStudent" type="com.cqut.crud.bean.ProjectStudent">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="student_id" jdbcType="INTEGER" property="studentId"/>
+        <result column="project_id" jdbcType="INTEGER" property="projectId"/>
+        <result column="id_number" jdbcType="VARCHAR" property="idNumber"/>
+        <result column="school_roll_id" jdbcType="INTEGER" property="schoolRollId"/>
+        <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="amount" jdbcType="DOUBLE" property="amount"/>
+        <result column="tuition" jdbcType="DOUBLE" property="tuition"/>
+        <result column="from_type" jdbcType="VARCHAR" property="fromType"/>
+        <result column="applied_at" jdbcType="TIMESTAMP" property="appliedAt"/>
+        <result column="census_register" jdbcType="VARCHAR" property="censusRegister"/>
+        <result column="school_name" jdbcType="VARCHAR" property="schoolName"/>
+        <result column="ownership" jdbcType="INTEGER" property="ownership"/>
+        <result column="school_phase" jdbcType="VARCHAR" property="schoolPhase"/>
+        <result column="poverty_type" jdbcType="VARCHAR" property="povertyType"/>
+        <result column="bankcard_id" jdbcType="INTEGER" property="bankcardId"/>
+        <result column="returned_at" jdbcType="TIMESTAMP" property="returnedAt"/>
+        <result column="no_pass_reason" jdbcType="VARCHAR" property="noPassReason"/>
+        <association property="studentStatus" javaType="com.cqut.crud.bean.StudentStatus">
+            <id column="school_phase" property="schoolPhase"/>
+        </association>
+        <association property="student" javaType="com.cqut.crud.bean.Student">
+            <id column="name" property="name"/>
+        </association>
+        <association property="studentBankcard" javaType="com.cqut.crud.bean.StudentBankcard">
+            <id column="bank_name" property="bankName"/>
+        </association>
+    </resultMap>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+    id, student_id, project_id, id_number, school_roll_id, project_type_id, status,
+    amount, tuition, from_type, applied_at, census_register, school_name, ownership, 
+    school_phase, poverty_type, bankcard_id, returned_at, no_pass_reason
+  </sql>
+    <sql id="WithProject_Column_List">
+    p.id, p.student_id, p.project_id, p.id_number, p.school_roll_id, p.project_type_id, p.status,
+    p.amount, p.tuition, p.from_type, p.applied_at, p.census_register, p.school_name, p.ownership,
+    p.school_phase, p.poverty_type, p.bankcard_id, p.returned_at, p.no_pass_reason , f.`name`, f.year, f.term,f.description
+  </sql>
+    <sql id="WithProjectAndStudent_Column_List">
+    p.id, p.student_id, p.project_id, p.id_number, p.school_roll_id, p.project_type_id, p.status as p_status,
+    p.amount, p.tuition, p.from_type, p.applied_at, p.census_register, p.school_name, p.ownership,
+    p.school_phase, p.poverty_type, p.bankcard_id, p.returned_at, p.no_pass_reason ,f.name as f_name, f.limit_comment as f_limitComment,f.status as f_status,
+    s.name as s_name, s.gender , s.census_register,s.family_poverty_desc
+  </sql>
+    <sql id="WithStudentStatusAndStudent_Column_List">
+    p.id, p.student_id, p.project_id, p.id_number, p.school_roll_id, p.project_type_id, p.status,
+    p.amount, p.tuition, p.from_type, p.applied_at, p.census_register, p.school_name, p.ownership,
+    p.school_phase, p.poverty_type, p.bankcard_id, p.returned_at, p.no_pass_reason,a.school_phase,b.name,c.bank_name
+  </sql>
+
+    <select id="selectByExample" parameterType="com.cqut.crud.bean.ProjectStudentExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from project_student
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from project_student
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from project_student
+        where student_id = #{studentId} AND project_id = #{projectId}
+    </select>
+
+    <select id="selectWithProject" parameterType="java.lang.Integer" resultMap="ResultMapWithProject">
+        select
+        <include refid="WithProject_Column_List"/>
+        from project_student AS p LEFT JOIN funded_project AS f ON p.`project_id` = f.`id`
+        where p.student_id = #{parseInt,jdbcType=INTEGER}
+    </select>
+    <select id="selectWithProjectAndStudent" parameterType="java.lang.Integer"
+            resultMap="ResultMapWithProjectAndStudent">
+        select
+        <include refid="WithProjectAndStudent_Column_List"/>
+        from project_student AS p LEFT JOIN funded_project AS f ON p.project_id=f.id LEFT JOIN student AS s ON
+        p.student_id = s.id
+        where p.project_id = #{parseInt,jdbcType=INTEGER}
+    </select>
+    <select id="selectWithStudentStatusAndStudent" parameterType="java.lang.Integer"
+            resultMap="ResultMapWithStudentStatusAndStudent">
+        select
+        <include refid="WithStudentStatusAndStudent_Column_List"/>
+        from project_student AS p LEFT JOIN student_status AS a ON p.student_id=a.student_id LEFT JOIN student AS b ON
+        p.student_id = b.id
+        LEFT JOIN student_bankcard AS c ON p.student_id = c.student_id
+        where p.project_id = #{parseInt,jdbcType=INTEGER} and p.status="3"
+    </select>
+    <select id="selectProjectStudentWithStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from project_student
+        where project_id = #{parseInt,jdbcType=INTEGER} and (status="3" or status= "4")
+    </select>
+
+    <select id="getPassedFundedObjects" parameterType="java.lang.Integer" resultMap="ResultMapWithProjectAndStudent">
+        select
+        <include refid="WithProjectAndStudent_Column_List"/>
+        from project_student AS p LEFT JOIN funded_project AS f ON p.project_id=f.id LEFT JOIN student AS s ON
+        p.student_id = s.id
+        where p.project_id = #{parseInt,jdbcType=INTEGER} and (p.status="3" or p.status="4")
+    </select>
+
+    <select id="getLook" parameterType="java.lang.Integer" resultMap="ResultMapWithProjectAndStudent">
+        select
+        <include refid="WithProjectAndStudent_Column_List"/>
+        from project_student AS p LEFT JOIN funded_project AS f ON p.project_id=f.id LEFT JOIN student AS s ON
+        p.student_id = s.id
+        where p.id = #{parseInt,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from project_student
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.cqut.crud.bean.ProjectStudentExample">
+        delete from project_student
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cqut.crud.bean.ProjectStudent">
+    insert into project_student (id, student_id, project_id, 
+      id_number, school_roll_id, project_type_id, 
+      status, amount,
+      tuition, from_type, applied_at, 
+      census_register, school_name, ownership, 
+      school_phase, poverty_type, bankcard_id, 
+      returned_at, no_pass_reason)
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, 
+      #{idNumber,jdbcType=VARCHAR}, #{schoolRollId,jdbcType=INTEGER}, #{projectTypeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{grantStatus,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, 
+      #{tuition,jdbcType=DOUBLE}, #{fromType,jdbcType=VARCHAR}, #{appliedAt,jdbcType=TIMESTAMP}, 
+      #{censusRegister,jdbcType=VARCHAR}, #{schoolName,jdbcType=VARCHAR}, #{ownership,jdbcType=INTEGER}, 
+      #{schoolPhase,jdbcType=VARCHAR}, #{povertyType,jdbcType=VARCHAR}, #{bankcardId,jdbcType=INTEGER}, 
+      #{returnedAt,jdbcType=TIMESTAMP}, #{noPassReason,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.cqut.crud.bean.ProjectStudent">
+        insert into project_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="studentId != null">
+                student_id,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="idNumber != null">
+                id_number,
+            </if>
+            <if test="schoolRollId != null">
+                school_roll_id,
+            </if>
+            <if test="projectTypeId != null">
+                project_type_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="tuition != null">
+                tuition,
+            </if>
+            <if test="fromType != null">
+                from_type,
+            </if>
+            <if test="appliedAt != null">
+                applied_at,
+            </if>
+            <if test="censusRegister != null">
+                census_register,
+            </if>
+            <if test="schoolName != null">
+                school_name,
+            </if>
+            <if test="ownership != null">
+                ownership,
+            </if>
+            <if test="schoolPhase != null">
+                school_phase,
+            </if>
+            <if test="povertyType != null">
+                poverty_type,
+            </if>
+            <if test="bankcardId != null">
+                bankcard_id,
+            </if>
+            <if test="returnedAt != null">
+                returned_at,
+            </if>
+            <if test="noPassReason != null">
+                no_pass_reason,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="studentId != null">
+                #{studentId,jdbcType=INTEGER},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=INTEGER},
+            </if>
+            <if test="idNumber != null">
+                #{idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolRollId != null">
+                #{schoolRollId,jdbcType=INTEGER},
+            </if>
+            <if test="projectTypeId != null">
+                #{projectTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="tuition != null">
+                #{tuition,jdbcType=DOUBLE},
+            </if>
+            <if test="fromType != null">
+                #{fromType,jdbcType=VARCHAR},
+            </if>
+            <if test="appliedAt != null">
+                #{appliedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="censusRegister != null">
+                #{censusRegister,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolName != null">
+                #{schoolName,jdbcType=VARCHAR},
+            </if>
+            <if test="ownership != null">
+                #{ownership,jdbcType=INTEGER},
+            </if>
+            <if test="schoolPhase != null">
+                #{schoolPhase,jdbcType=VARCHAR},
+            </if>
+            <if test="povertyType != null">
+                #{povertyType,jdbcType=VARCHAR},
+            </if>
+            <if test="bankcardId != null">
+                #{bankcardId,jdbcType=INTEGER},
+            </if>
+            <if test="returnedAt != null">
+                #{returnedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="noPassReason != null">
+                #{noPassReason,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cqut.crud.bean.ProjectStudentExample" resultType="java.lang.Long">
+        select count(*) from project_student
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update project_student
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.studentId != null">
+                student_id = #{record.studentId,jdbcType=INTEGER},
+            </if>
+            <if test="record.projectId != null">
+                project_id = #{record.projectId,jdbcType=INTEGER},
+            </if>
+            <if test="record.idNumber != null">
+                id_number = #{record.idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.schoolRollId != null">
+                school_roll_id = #{record.schoolRollId,jdbcType=INTEGER},
+            </if>
+            <if test="record.projectTypeId != null">
+                project_type_id = #{record.projectTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.amount != null">
+                amount = #{record.amount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.tuition != null">
+                tuition = #{record.tuition,jdbcType=DOUBLE},
+            </if>
+            <if test="record.fromType != null">
+                from_type = #{record.fromType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.appliedAt != null">
+                applied_at = #{record.appliedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.censusRegister != null">
+                census_register = #{record.censusRegister,jdbcType=VARCHAR},
+            </if>
+            <if test="record.schoolName != null">
+                school_name = #{record.schoolName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ownership != null">
+                ownership = #{record.ownership,jdbcType=INTEGER},
+            </if>
+            <if test="record.schoolPhase != null">
+                school_phase = #{record.schoolPhase,jdbcType=VARCHAR},
+            </if>
+            <if test="record.povertyType != null">
+                poverty_type = #{record.povertyType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bankcardId != null">
+                bankcard_id = #{record.bankcardId,jdbcType=INTEGER},
+            </if>
+            <if test="record.returnedAt != null">
+                returned_at = #{record.returnedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.noPassReason != null">
+                no_pass_reason = #{record.noPassReason,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update project_student
+        set id = #{record.id,jdbcType=INTEGER},
+        student_id = #{record.studentId,jdbcType=INTEGER},
+        project_id = #{record.projectId,jdbcType=INTEGER},
+        id_number = #{record.idNumber,jdbcType=VARCHAR},
+        school_roll_id = #{record.schoolRollId,jdbcType=INTEGER},
+        project_type_id = #{record.projectTypeId,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=VARCHAR},
+        amount = #{record.amount,jdbcType=DOUBLE},
+        tuition = #{record.tuition,jdbcType=DOUBLE},
+        from_type = #{record.fromType,jdbcType=VARCHAR},
+        applied_at = #{record.appliedAt,jdbcType=TIMESTAMP},
+        census_register = #{record.censusRegister,jdbcType=VARCHAR},
+        school_name = #{record.schoolName,jdbcType=VARCHAR},
+        ownership = #{record.ownership,jdbcType=INTEGER},
+        school_phase = #{record.schoolPhase,jdbcType=VARCHAR},
+        poverty_type = #{record.povertyType,jdbcType=VARCHAR},
+        bankcard_id = #{record.bankcardId,jdbcType=INTEGER},
+        returned_at = #{record.returnedAt,jdbcType=TIMESTAMP},
+        no_pass_reason = #{record.noPassReason,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cqut.crud.bean.ProjectStudent">
+        update project_student
+        <set>
+            <if test="studentId != null">
+                student_id = #{studentId,jdbcType=INTEGER},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=INTEGER},
+            </if>
+            <if test="idNumber != null">
+                id_number = #{idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolRollId != null">
+                school_roll_id = #{schoolRollId,jdbcType=INTEGER},
+            </if>
+            <if test="projectTypeId != null">
+                project_type_id = #{projectTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="tuition != null">
+                tuition = #{tuition,jdbcType=DOUBLE},
+            </if>
+            <if test="fromType != null">
+                from_type = #{fromType,jdbcType=VARCHAR},
+            </if>
+            <if test="appliedAt != null">
+                applied_at = #{appliedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="censusRegister != null">
+                census_register = #{censusRegister,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolName != null">
+                school_name = #{schoolName,jdbcType=VARCHAR},
+            </if>
+            <if test="ownership != null">
+                ownership = #{ownership,jdbcType=INTEGER},
+            </if>
+            <if test="schoolPhase != null">
+                school_phase = #{schoolPhase,jdbcType=VARCHAR},
+            </if>
+            <if test="povertyType != null">
+                poverty_type = #{povertyType,jdbcType=VARCHAR},
+            </if>
+            <if test="bankcardId != null">
+                bankcard_id = #{bankcardId,jdbcType=INTEGER},
+            </if>
+            <if test="returnedAt != null">
+                returned_at = #{returnedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="noPassReason != null">
+                no_pass_reason = #{noPassReason,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cqut.crud.bean.ProjectStudent">
+    update project_student
+    set student_id = #{studentId,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      school_roll_id = #{schoolRollId,jdbcType=INTEGER},
+      project_type_id = #{projectTypeId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DOUBLE},
+      tuition = #{tuition,jdbcType=DOUBLE},
+      from_type = #{fromType,jdbcType=VARCHAR},
+      applied_at = #{appliedAt,jdbcType=TIMESTAMP},
+      census_register = #{censusRegister,jdbcType=VARCHAR},
+      school_name = #{schoolName,jdbcType=VARCHAR},
+      ownership = #{ownership,jdbcType=INTEGER},
+      school_phase = #{schoolPhase,jdbcType=VARCHAR},
+      poverty_type = #{povertyType,jdbcType=VARCHAR},
+      bankcard_id = #{bankcardId,jdbcType=INTEGER},
+      returned_at = #{returnedAt,jdbcType=TIMESTAMP},
+      no_pass_reason = #{noPassReason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

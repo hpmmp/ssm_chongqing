@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqut.crud.dao.FundedProjectMapper">
+  <resultMap id="BaseResultMap" type="com.cqut.crud.bean.FundedProject">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="term" jdbcType="INTEGER" property="term" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="standard_comment" jdbcType="VARCHAR" property="standardComment" />
+    <result column="phase" jdbcType="VARCHAR" property="phase" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="limit_comment" jdbcType="VARCHAR" property="limitComment" />
+    <result column="creat_at" jdbcType="TIMESTAMP" property="creatAt" />
+    <result column="apply_finished_at" jdbcType="TIMESTAMP" property="applyFinishedAt" />
+    <result column="audit_finished_at" jdbcType="TIMESTAMP" property="auditFinishedAt" />
+    <result column="publicize_finished_at" jdbcType="TIMESTAMP" property="publicizeFinishedAt" />
+    <result column="grant_finished_at" jdbcType="TIMESTAMP" property="grantFinishedAt" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+  </resultMap>
+  <resultMap id="WithTypeResultMap" type="com.cqut.crud.bean.FundedProject">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="term" jdbcType="INTEGER" property="term" />
+    <result column="a_name" jdbcType="VARCHAR" property="name" />
+    <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
+    <result column="a_description" jdbcType="VARCHAR" property="description" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="standard_comment" jdbcType="VARCHAR" property="standardComment" />
+    <result column="phase" jdbcType="VARCHAR" property="phase" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="limit_comment" jdbcType="VARCHAR" property="limitComment" />
+    <result column="creat_at" jdbcType="TIMESTAMP" property="creatAt" />
+    <result column="apply_finished_at" jdbcType="TIMESTAMP" property="applyFinishedAt" />
+    <result column="audit_finished_at" jdbcType="TIMESTAMP" property="auditFinishedAt" />
+    <result column="publicize_finished_at" jdbcType="TIMESTAMP" property="publicizeFinishedAt" />
+    <result column="grant_finished_at" jdbcType="TIMESTAMP" property="grantFinishedAt" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <association property="projectType" javaType="com.cqut.crud.bean.ProjectType">
+      <id column="id" property="id"/>
+      <result column="b_name" property="name"/>
+      <result column="b_description" property="description"/>
+      <result column="frequency" property="frequency"/>
+      <result column="level" property="level"/>
+      <result column="status" property="status"/>
+    </association>
+  </resultMap>
+  <resultMap id="WithMemberResultMap" type="com.cqut.crud.bean.FundedProject">
+    <id column="a_id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="term" jdbcType="INTEGER" property="term" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="standard_comment" jdbcType="VARCHAR" property="standardComment" />
+    <result column="phase" jdbcType="VARCHAR" property="phase" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="limit_comment" jdbcType="VARCHAR" property="limitComment" />
+    <result column="creat_at" jdbcType="TIMESTAMP" property="creatAt" />
+    <result column="apply_finished_at" jdbcType="TIMESTAMP" property="applyFinishedAt" />
+    <result column="audit_finished_at" jdbcType="TIMESTAMP" property="auditFinishedAt" />
+    <result column="publicize_finished_at" jdbcType="TIMESTAMP" property="publicizeFinishedAt" />
+    <result column="grant_finished_at" jdbcType="TIMESTAMP" property="grantFinishedAt" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <collection property="projectStudentList" ofType="com.cqut.crud.bean.ProjectStudent">
+      <id column="b_id" property="id"/>
+    </collection>
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, project_type_id, status, `year`, term, `name`, sponsor, description, amount,
+    standard_comment, phase, `type`, limit_comment,creat_at, apply_finished_at, audit_finished_at, publicize_finished_at,
+    grant_finished_at, deleted_at
+  </sql>
+  <sql id="WithType_Column_List">
+    a.id, a.user_id, a.project_type_id, a.status, a.`year`, a.term, a.`name` as a_name, a.sponsor, a.description as a_description, a.amount,
+    a.standard_comment, a.phase, a.`type`, a.limit_comment,a.creat_at, a.apply_finished_at, a.audit_finished_at, a.publicize_finished_at, a.grant_finished_at,
+    a.deleted_at, b.id, b.name as b_name, b.description as b_description, b.frequency, b.level, b.status
+  </sql>
+  <sql id="WithMember_Column_List">
+    a.id as a_id, a.user_id, a.project_type_id, a.status, a.`year`, a.term, a.`name`, a.sponsor, a.description , a.amount,
+    a.standard_comment, a.phase, a.`type`, a.limit_comment,a.creat_at, a.apply_finished_at, a.audit_finished_at, a.publicize_finished_at, a.grant_finished_at,
+    a.deleted_at, b.id as b_id
+  </sql>
+
+
+  <select id="selectByExample" parameterType="com.cqut.crud.bean.FundedProjectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from funded_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByWithType" resultMap="WithTypeResultMap">
+    select
+    <include refid="WithType_Column_List" />
+    from funded_project AS a LEFT JOIN project_type AS b ON a.`project_type_id`=b.`id`
+    where a.deleted_at is null
+  </select>
+  <select id="selectByWithStatus" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  FROM funded_project
+  where deleted_at is null and (status="4" or status ="5")
+</select>
+
+  <select id="getPublicityFundedProject" resultMap="WithTypeResultMap">
+    select
+    <include refid="WithType_Column_List" />
+    FROM funded_project AS a LEFT JOIN project_type AS b ON a.`project_type_id` = b.id
+    WHERE a.`status` = "3" AND a.deleted_at IS NULL
+  </select>
+  <select id="selectApplicationStatus" resultMap="WithTypeResultMap">
+    select
+    <include refid="WithType_Column_List" />
+    from funded_project AS a LEFT JOIN project_type AS b ON a.`project_type_id`=b.`id`
+    where a.deleted_at is null AND a.status = "1"
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from funded_project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeyWithType" parameterType="java.lang.Integer" resultMap="WithTypeResultMap">
+    select
+    <include refid="WithType_Column_List" />
+    from funded_project AS a LEFT JOIN project_type AS b ON a.`project_type_id`=b.`id`
+    where a.id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCondition" parameterType="com.cqut.crud.bean.FundedProject" resultMap="WithTypeResultMap">
+    select
+    <include refid="WithType_Column_List" />
+    from funded_project AS a LEFT JOIN project_type AS b ON a.`project_type_id`=b.`id`
+    <where>
+    <if test="name != null and name!=''">
+        AND a.`name` LIKE CONCAT('%',#{name},'%')
+      </if>
+      AND  deleted_at is NULL
+    </where>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from funded_project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqut.crud.bean.FundedProjectExample">
+    delete from funded_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqut.crud.bean.FundedProject">
+    insert into funded_project (id, user_id, project_type_id, 
+      status, `year`, term,
+      `name`, sponsor, description,
+      amount, standard_comment, phase, 
+      `type`, limit_comment,
+      creat_at, apply_finished_at, audit_finished_at, 
+      publicize_finished_at, grant_finished_at, 
+      deleted_at)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{projectTypeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{term,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{sponsor,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DOUBLE}, #{standardComment,jdbcType=VARCHAR}, #{phase,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{limitComment,jdbcType=VARCHAR},#{creatAt,jdbcType=TIMESTAMP}, #{applyFinishedAt,jdbcType=TIMESTAMP}, #{auditFinishedAt,jdbcType=TIMESTAMP},
+      #{publicizeFinishedAt,jdbcType=TIMESTAMP}, #{grantFinishedAt,jdbcType=TIMESTAMP}, 
+      #{deletedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqut.crud.bean.FundedProject">
+    insert into funded_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="projectTypeId != null">
+        project_type_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="year != null">
+        `year`,
+      </if>
+      <if test="term != null">
+        term,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="sponsor != null">
+        sponsor,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="standardComment != null">
+        standard_comment,
+      </if>
+      <if test="phase != null">
+        phase,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="limitComment != null">
+        limit_comment,
+      </if>
+      <if test="creatAt != null">
+        creat_at,
+      </if>
+      <if test="applyFinishedAt != null">
+        apply_finished_at,
+      </if>
+      <if test="auditFinishedAt != null">
+        audit_finished_at,
+      </if>
+      <if test="publicizeFinishedAt != null">
+        publicize_finished_at,
+      </if>
+      <if test="grantFinishedAt != null">
+        grant_finished_at,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="projectTypeId != null">
+        #{projectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="term != null">
+        #{term,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsor != null">
+        #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="standardComment != null">
+        #{standardComment,jdbcType=VARCHAR},
+      </if>
+      <if test="phase != null">
+        #{phase,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="limitComment != null">
+        #{limitComment,jdbcType=VARCHAR},
+      </if>
+      <if test="creatAt != null">
+        #{creatAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyFinishedAt != null">
+        #{applyFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditFinishedAt != null">
+        #{auditFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publicizeFinishedAt != null">
+        #{publicizeFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grantFinishedAt != null">
+        #{grantFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqut.crud.bean.FundedProjectExample" resultType="java.lang.Long">
+    select count(*) from funded_project
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update funded_project
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectTypeId != null">
+        project_type_id = #{record.projectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null">
+        `year` = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.term != null">
+        term = #{record.term,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sponsor != null">
+        sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        amount = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.standardComment != null">
+        standard_comment = #{record.standardComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phase != null">
+        phase = #{record.phase,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitComment != null">
+        limit_comment = #{record.limitComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatAt != null">
+        creat_at = #{record.creatAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.applyFinishedAt != null">
+        apply_finished_at = #{record.applyFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditFinishedAt != null">
+        audit_finished_at = #{record.auditFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.publicizeFinishedAt != null">
+        publicize_finished_at = #{record.publicizeFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.grantFinishedAt != null">
+        grant_finished_at = #{record.grantFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update funded_project
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      project_type_id = #{record.projectTypeId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      `year` = #{record.year,jdbcType=INTEGER},
+      term = #{record.term,jdbcType=INTEGER},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=DOUBLE},
+      standard_comment = #{record.standardComment,jdbcType=VARCHAR},
+      phase = #{record.phase,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=VARCHAR},
+      limit_comment = #{record.limitComment,jdbcType=VARCHAR},
+      creat_at = #{record.creatAt,jdbcType=TIMESTAMP},
+      apply_finished_at = #{record.applyFinishedAt,jdbcType=TIMESTAMP},
+      audit_finished_at = #{record.auditFinishedAt,jdbcType=TIMESTAMP},
+      publicize_finished_at = #{record.publicizeFinishedAt,jdbcType=TIMESTAMP},
+      grant_finished_at = #{record.grantFinishedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqut.crud.bean.FundedProject">
+    update funded_project
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="projectTypeId != null">
+        project_type_id = #{projectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        `year` = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="term != null">
+        term = #{term,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsor != null">
+        sponsor = #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="standardComment != null">
+        standard_comment = #{standardComment,jdbcType=VARCHAR},
+      </if>
+      <if test="phase != null">
+        phase = #{phase,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="limitComment != null">
+        limit_comment = #{limitComment,jdbcType=VARCHAR},
+      </if>
+      <if test="creatAt != null">
+        creat_at = #{creatAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyFinishedAt != null">
+        apply_finished_at = #{applyFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditFinishedAt != null">
+        audit_finished_at = #{auditFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publicizeFinishedAt != null">
+        publicize_finished_at = #{publicizeFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grantFinishedAt != null">
+        grant_finished_at = #{grantFinishedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqut.crud.bean.FundedProject">
+    update funded_project
+    set user_id = #{userId,jdbcType=INTEGER},
+      project_type_id = #{projectTypeId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      `year` = #{year,jdbcType=INTEGER},
+      term = #{term,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      sponsor = #{sponsor,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DOUBLE},
+      standard_comment = #{standardComment,jdbcType=VARCHAR},
+      phase = #{phase,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      limit_comment = #{limitComment,jdbcType=VARCHAR},
+      creat_at = #{creatAt,jdbcType=TIMESTAMP},
+      apply_finished_at = #{applyFinishedAt,jdbcType=TIMESTAMP},
+      audit_finished_at = #{auditFinishedAt,jdbcType=TIMESTAMP},
+      publicize_finished_at = #{publicizeFinishedAt,jdbcType=TIMESTAMP},
+      grant_finished_at = #{grantFinishedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
