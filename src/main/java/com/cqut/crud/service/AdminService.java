@@ -16,6 +16,7 @@ public class AdminService {
     private AdminMapper adminMapper;
 
     public Admin login(String uid, String pwd) {
+
         Admin admin = adminMapper.adminLogin(uid,pwd);
         if(admin!=null){
             return admin;
