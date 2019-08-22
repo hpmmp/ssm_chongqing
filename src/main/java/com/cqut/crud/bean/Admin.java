@@ -1,6 +1,7 @@
 package com.cqut.crud.bean;
 
 /**
+ * 这是版本错误阶段
  * 测试回退版本
  * 用户密码均使用AES算法加解密
  */
