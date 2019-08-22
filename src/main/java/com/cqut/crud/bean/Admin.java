@@ -1,6 +1,7 @@
 package com.cqut.crud.bean;
 
 /**
+ * 测试git
  * 用户密码均使用AES算法加解密
  */
 public class Admin {
