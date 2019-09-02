@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
-/**
- * 家庭成员表
- */
 public class FamilyMember {
     private Integer id;
 
