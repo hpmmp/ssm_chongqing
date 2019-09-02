@@ -1,9 +1,7 @@
 package com.cqut.crud.bean;
 
 /**
- * 测试冲突
- * 测试回退版本
- * 用户密码均使用AES算法加解密
+ *
  */
 public class Admin {
     private Integer id;
