@@ -4,6 +4,10 @@ package com.cqut.crud.bean;
  * @author ChenTengfei
  * @date 2019/5/11 14:25
  **/
+
+/**
+ * 字典表
+ */
 public class Dictionary {
     private Integer id;
 
